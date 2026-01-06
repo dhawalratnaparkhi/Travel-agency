@@ -684,6 +684,583 @@
                                 <input type="radio" name="packageType" value="standard" id="standard">
                                 <label for="standard">Standard</label>
                             </div>
+               flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        /* Services */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+
+        /* Why Choose Us */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            background: var(--light-blue);
+            padding: 3rem;
+            border-radius: 12px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+
+        /* Form Styles */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+        }
+
+        /* Group Tours */
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tour-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .tour-content {
+            padding: 1.5rem;
+        }
+
+        .tour-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .tour-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .tour-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: #25d366;
+            color: var(--white);
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 2rem 1rem;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 24px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Custom<span>Tours</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#customize">Customize Trip</a></li>
+                <li><a href="#group-tours">Group Tours</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>100% Customized Tours, Planned Just for You</h1>
+        <p>Tell us your dream destination, budget, and preferences - we'll handle everything else</p>
+        <div class="hero-buttons">
+            <a href="#customize" class="btn btn-primary">Plan My Trip</a>
+            <a href="#group-tours" class="btn btn-secondary">View Group Tours</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services">
+            <div class="service-card">
+                <div class="service-icon">✈️</div>
+                <h3>Customized Tours</h3>
+                <p>Tell us your days, budget, hotel type, and destination. We plan everything end-to-end for your perfect journey.</p>
+                <a href="#customize" class="btn btn-primary">Customize My Trip</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👥</div>
+                <h3>Group Tours</h3>
+                <p>Fixed departure tours with pre-planned itineraries and transparent pricing. Join other travelers for amazing experiences.</p>
+                <a href="#group-tours" class="btn btn-primary">See Group Tours</a>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Fill Requirements</h3>
+                <p>Share your travel preferences and requirements with us</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Get Custom Plan</h3>
+                <p>Receive a personalized itinerary tailored just for you</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Confirm & Book</h3>
+                <p>Review, confirm, and we'll handle all bookings</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Travel Stress-Free</h3>
+                <p>Enjoy your journey with complete support</p>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <h2 class="section-title" style="margin-top: 4rem;">Why Choose Us</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>100% Customization</h3>
+                <p>Every trip designed specifically for you</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔄</div>
+                <h3>End-to-End Booking</h3>
+                <p>We handle everything from start to finish</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💎</div>
+                <h3>Transparent Pricing</h3>
+                <p>No hidden costs, clear quotes upfront</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">👤</div>
+                <h3>Personal Expert Support</h3>
+                <p>Dedicated travel expert for your journey</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customize Tour Form -->
+    <section id="customize" style="background: var(--gray-100); padding: 4rem 2rem;">
+        <div class="form-container">
+            <h2 style="text-align: center; color: var(--primary-blue); margin-bottom: 1rem;">Create Your Custom Trip</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">Share your requirements and our expert will craft the perfect itinerary for you</p>
+            
+            <div id="successMessage" class="success-message hidden">
+                Thank you! Our travel expert will contact you within 24 hours.
+            </div>
+
+            <form id="customTourForm">
+                <div class="form-section">
+                    <h3>Personal Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>City / Country *</label>
+                            <input type="text" name="location" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Trip Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Destination *</label>
+                            <input type="text" name="destination" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Days *</label>
+                            <input type="number" name="days" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Number of Adults *</label>
+                            <input type="number" name="adults" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Children</label>
+                            <input type="number" name="children" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Package & Preferences</h3>
+                    <div class="form-group">
+                        <label>Package Type *</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="packageType" value="budget" id="budget" required>
+                                <label for="budget">Budget</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="packageType" value="standard" id="standard">
+                                <label for="standard">Standard</label>
+                            </div>
                             <div class="radio-option">
                                 <input type="radio" name="packageType" value="premium" id="premium">
                                 <label for="premium">Premium</label>
