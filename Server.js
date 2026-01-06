@@ -1,3 +1,6 @@
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
