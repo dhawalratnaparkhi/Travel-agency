@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CustomTours</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .header {
+            background: #2563eb;
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .tab:hover {
+            color: #2563eb;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            color: #1f2937;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge.new {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge.premium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge.budget {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .info-item {
+            padding: 0.5rem 0;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-item value {
+            display: block;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-refresh {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-refresh:hover {
+            background: #1e40af;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .timestamp {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                overflow-x: auto;
+            }
+
+            .tab {
+                padding: 0.75rem 1rem;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Admin Dashboard - CustomTours</h1>
+    </div>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <h3>CUSTOM TOUR REQUESTS</h3>
+                <div class="number" id="customToursCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>GROUP TOUR REQUESTS</h3>
+                <div class="number" id="groupToursCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>CONTACT MESSAGES</h3>
+                <div class="number" id="contactMessagesCount">0</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('custom-tours')">Custom Tours</button>
+            <button class="tab" onclick="showTab('group-tours')">Group Tours</button>
+            <button class="tab" onclick="showTab('messages')">Messages</button>
+        </div>
+
+        <div id="custom-tours" class="tab-content active">
+            <div class="card-header">
+                <h3>Custom Tour Requests</h3>
+                <button class="btn btn-refresh" onclick="loadData()">🔄 Refresh</button>
+            </div>
+            <div id="customToursContent" class="loading">Loading...</div>
+        </div>
+
+        <div id="group-tours" class="tab-content">
+            <div class="card-header">
+                <h3>Group Tour Join Requests</h3>
+                <button class="btn btn-refresh" onclick="loadData()">🔄 Refresh</button>
+            </div>
+            <div id="groupToursContent" class="loading">Loading...</div>
+        </div>
+
+        <div id="messages" class="tab-content">
+            <div class="card-header">
+                <h3>Contact Messages</h3>
+                <button class="btn btn-refresh" onclick="loadData()">🔄 Refresh</button>
+            </div>
+            <div id="messagesContent" class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = window.location.origin;
+
+        // Tab switching
+        function showTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Load all data
+        async function loadData() {
+            try {
+                // Load custom tours
+                const customToursRes = await fetch(`${API_URL}/api/admin/custom-tours`);
+                const customToursData = await customToursRes.json();
+                displayCustomTours(customToursData.data);
+
+                // Load group tour requests
+                const groupToursRes = await fetch(`${API_URL}/api/admin/group-tour-requests`);
+                const groupToursData = await groupToursRes.json();
+                displayGroupTours(groupToursData.data);
+
+                // Load contact messages
+                const messagesRes = await fetch(`${API_URL}/api/admin/contact-messages`);
+                const messagesData = await messagesRes.json();
+                displayMessages(messagesData.data);
+
+                // Update stats
+                document.getElementById('customToursCount').textContent = customToursData.data.length;
+                document.getElementById('groupToursCount').textContent = groupToursData.data.length;
+                document.getElementById('contactMessagesCount').textContent = messagesData.data.length;
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                alert('Failed to load data. Please check if the server is running.');
+            }
+        }
+
+        // Display custom tours
+        function displayCustomTours(tours) {
+            const container = document.getElementById('customToursContent');
+            
+            if (tours.length === 0) {
+                container.innerHTML = '<div class="empty">No custom tour requests yet.</div>';
+                return;
+            }
+
+            container.innerHTML = tours.reverse().map(tour => `
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <h3 style="margin: 0; color: #2563eb;">${tour.destination}</h3>
+                        <span class="badge ${tour.packageType}">${tour.packageType.toUpperCase()}</span>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Name</label>
+                            <value>${tour.fullName}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone</label>
+                            <value>${tour.phone}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Email</label>
+                            <value>${tour.email}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Location</label>
+                            <value>${tour.location}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Duration</label>
+                            <value>${tour.days} days</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Travelers</label>
+                            <value>${tour.adults} adults, ${tour.children} children</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Hotel</label>
+                            <value>${tour.hotelPreference}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Flights</label>
+                            <value>${tour.flights}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Transport</label>
+                            <value>${tour.transport}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Start Date</label>
+                            <value>${tour.startDate}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Flexible Dates</label>
+                            <value>${tour.flexibleDates}</value>
+                        </div>
+                    </div>
+                    
+                    ${tour.specialRequirements ? `
+                        <div style="margin-top: 1rem; padding: 1rem; background: #f9fafb; border-radius: 8px;">
+                            <label style="font-size: 0.85rem; color: #6b7280;">Special Requirements:</label>
+                            <p style="margin-top: 0.5rem;">${tour.specialRequirements}</p>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="timestamp">Submitted: ${new Date(tour.submittedAt).toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+
+        // Display group tour requests
+        function displayGroupTours(tours) {
+            const container = document.getElementById('groupToursContent');
+            
+            if (tours.length === 0) {
+                container.innerHTML = '<div class="empty">No group tour requests yet.</div>';
+                return;
+            }
+
+            container.innerHTML = tours.reverse().map(tour => `
+                <div class="card">
+                    <h3 style="color: #2563eb; margin-bottom: 1rem;">${tour.tourName || 'Group Tour Request'}</h3>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Name</label>
+                            <value>${tour.name}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone</label>
+                            <value>${tour.phone}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Email</label>
+                            <value>${tour.email}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Number of People</label>
+                            <value>${tour.numberOfPeople}</value>
+                        </div>
+                    </div>
+                    
+                    ${tour.message ? `
+                        <div style="margin-top: 1rem; padding: 1rem; background: #f9fafb; border-radius: 8px;">
+                            <label style="font-size: 0.85rem; color: #6b7280;">Message:</label>
+                            <p style="margin-top: 0.5rem;">${tour.message}</p>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="timestamp">Submitted: ${new Date(tour.submittedAt).toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+
+        // Display contact messages
+        function displayMessages(messages) {
+            const container = document.getElementById('messagesContent');
+            
+            if (messages.length === 0) {
+                container.innerHTML = '<div class="empty">No contact messages yet.</div>';
+                return;
+            }
+
+            container.innerHTML = messages.reverse().map(msg => `
+                <div class="card">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Name</label>
+                            <value>${msg.name}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone</label>
+                            <value>${msg.phone}</value>
+                        </div>
+                        <div class="info-item">
+                            <label>Email</label>
+                            <value>${msg.email}</value>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 1rem; padding: 1rem; background: #f9fafb; border-radius: 8px;">
+                        <label style="font-size: 0.85rem; color: #6b7280;">Message:</label>
+                        <p style="margin-top: 0.5rem;">${msg.message}</p>
+                    </div>
+                    
+                    <div class="timestamp">Submitted: ${new Date(msg.submittedAt).toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+
+        // Load data on page load
+        loadData();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
